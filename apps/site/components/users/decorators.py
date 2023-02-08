@@ -1,4 +1,5 @@
 import functools
+from database import Database
 """ from fastapi_sessions """
 
 """ def login_required(view):

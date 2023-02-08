@@ -7,11 +7,12 @@ from apps.site.components.users.model import User
 @get_session
 async def authorization(request: Request, db_session = None):
     data = await request.json()
-    user_data = User.get_user(db_session, data["username"])
-    if user_data.username is not None and data["password"] == user_data.password:
+    return { "data": data }
+    """ user_data = User.get_user(db_session, data["username"]) """
+    """ if user_data.username is not None and data["password"] == user_data.password:
         return { "status": "ok" }
     else:
-        return { "status": "bed" }
+        return { "status": "bed" } """
 
 @get_session
 async def registration(request: Request, db_session = None):
