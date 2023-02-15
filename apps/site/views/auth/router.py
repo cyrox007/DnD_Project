@@ -10,5 +10,11 @@ def install(app: FastAPI):
         status_code=status.HTTP_200_OK,
         endpoint=handlers.authorization
     )
+    router.add_api_route(
+        "/registration",
+        methods=["POST"],
+        status_code=status.HTTP_200_OK,
+        endpoint=handlers.registration
+    )
     app.include_router(router)
     
