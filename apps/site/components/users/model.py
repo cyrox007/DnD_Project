@@ -36,12 +36,10 @@ class User(Database.Base):
     def insert_new_user(cls, db_session: Session, data: dict):
         new_user = User(
             email = data['email'],
-            first_name = data['first-name'],
-            last_name = data['last-name'],
-            nickname = data['nickname'],
+            username = data['username'],
             password = data['password'],
-            avatar = data['avatar'],
             user_role = 100,
+            avatar = Config.AVATAR_DIR+"default_avatar.png"
             remember_token = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
         )
         try:

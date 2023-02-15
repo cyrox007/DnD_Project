@@ -18,6 +18,9 @@ async def authorization(request: Request = None):
 async def registration(request: Request):
     db_session = Database.connect_database()
     data = await request.json()
+    if User.get_user(db_session, data["username"]) is not None:
+        return { "status": "bed" }
+        
     if User.insert_new_user(db_session, data) is not None:
         return { "status": "ok" }
     else:
