@@ -10,6 +10,10 @@ class Config:
 
     PATH_TO_DIR = os.path.dirname(os.path.abspath(__file__))
 
+    # avatar
+    AVATAR_DIR = '/uploads/us_avatars/'
+    FULL_AVATAR_DIR = os.path.join(PATH_TO_DIR, STATICS_FILEPATH, AVATAR_DIR)
+
      # Database
     db_name = os.environ.get('DB_NAME', 'dnddbase')
     db_user = os.environ.get('DB_USER', 'postgres')

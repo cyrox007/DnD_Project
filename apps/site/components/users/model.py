@@ -39,7 +39,7 @@ class User(Database.Base):
             username = data['username'],
             password = data['password'],
             user_role = 100,
-            avatar = Config.AVATAR_DIR+"default_avatar.png"
+            avatar = Config.AVATAR_DIR+"default_avatar.png",
             remember_token = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
         )
         try:
