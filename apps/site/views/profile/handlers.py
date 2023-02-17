@@ -9,5 +9,9 @@ async def get_profile(request: Request = None):
     user_data = User.get_user(db_session, response["username"])
     return { 
         "status": "ok",
-        "user": user_data
+        "username": user_data.username,
+        "email": user_data.email,
+        "first_name": user_data.first_name,
+        "surname": user_data.surname,
+        "avatar": user_data.avatar
         }
