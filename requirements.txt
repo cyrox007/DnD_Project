@@ -19,6 +19,8 @@ Jinja2==3.1.2
 kombu==5.2.4
 Mako==1.2.4
 MarkupSafe==2.1.2
+numpy==1.24.2
+opencv-python==4.7.0.68
 prompt-toolkit==3.0.36
 psycopg2-binary==2.9.5
 pycodestyle==2.10.0
@@ -34,3 +36,4 @@ typing_extensions==4.4.0
 uvicorn==0.20.0
 vine==5.0.0
 wcwidth==0.2.6
+Werkzeug==2.2.3
