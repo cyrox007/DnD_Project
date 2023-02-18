@@ -51,3 +51,44 @@ class User(Database.Base):
         except Exception as e:
             print(e)
             return False
+
+    
+    @classmethod
+    def update_profile(db_session: Session, data):
+        user_update = db_session.query(User).filter(
+            "username" == data["username"]
+        ).first()
+
+        if data["firstname"] is not "":
+            user_update.first_name = data["firstname"]
+        if data["surname"] is not "":
+            user_update.surname = data["surname"]
+
+        try:
+            db_session.add(user_update)
+            db_session.commit()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+
+    @classmethod
+    def update_user_password(db_session: Session, data):
+        user = db_session.query(User).filter(
+            "username" == data["username"]
+        ).first()
+
+        if user.password != data["userpassword"]:
+            print("Неверный пароль")
+            return False
+        
+        user.password = data["newpassword"]
+
+        try:
+            db_session.add(user)
+            db_session.commit()
+            return True
+        except Exception as e:
+            print(e)
+            return False
