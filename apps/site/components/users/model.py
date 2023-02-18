@@ -59,9 +59,9 @@ class User(Database.Base):
             User.username == data["username"]
         ).first()
 
-        if data["firstname"] is not "":
+        if data["firstname"] is not None:
             user_update.first_name = data["firstname"]
-        if data["surname"] is not "":
+        if data["surname"] is not None:
             user_update.surname = data["surname"]
 
         try:
