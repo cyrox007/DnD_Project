@@ -19,7 +19,7 @@ async def get_profile(request: Request):
         }
 
 async def update_profile(request: Request):
-    response = request.json()
+    response = await request.json()
     db_session = Database.connect_database()
 
     if User.update_profile(db_session, response) == True:
@@ -34,7 +34,7 @@ async def update_profile(request: Request):
         }
 
 async def update_password(request: Request):
-    response = request.json()
+    response = await request.json()
     db_session = Database.connect_database()
 
     if User.update_user_password(db_session, response) == True:
