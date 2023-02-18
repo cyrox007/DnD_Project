@@ -56,7 +56,7 @@ class User(Database.Base):
     @classmethod
     def update_profile(cls, db_session: Session, data):
         user_update = db_session.query(User).filter(
-            "username" == data["username"]
+            User.username == data["username"]
         ).first()
 
         if data["firstname"] is not "":
@@ -76,7 +76,7 @@ class User(Database.Base):
     @classmethod
     def update_user_password(cls, db_session: Session, data):
         user = db_session.query(User).filter(
-            "username" == data["username"]
+            User.username == data["username"]
         ).first()
 
         if user.password != data["userpassword"]:
