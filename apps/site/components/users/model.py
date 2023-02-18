@@ -54,7 +54,7 @@ class User(Database.Base):
 
     
     @classmethod
-    def update_profile(db_session: Session, data):
+    def update_profile(cls, db_session: Session, data):
         user_update = db_session.query(User).filter(
             "username" == data["username"]
         ).first()
@@ -74,7 +74,7 @@ class User(Database.Base):
 
 
     @classmethod
-    def update_user_password(db_session: Session, data):
+    def update_user_password(cls, db_session: Session, data):
         user = db_session.query(User).filter(
             "username" == data["username"]
         ).first()
