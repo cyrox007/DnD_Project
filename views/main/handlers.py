@@ -2,7 +2,7 @@ from fastapi.responses import HTMLResponse
 from fastapi import Request
 from typing import Union
 
-from apps.site.utils.j2 import render_template
+from utils.j2 import render_template
 
 
 async def main_page_dev(request: Request):

@@ -1,7 +1,8 @@
 import os
+from redis import Redis
 
 class Config:
-    STATICS_FILEPATH: str = 'apps/site/static'
+    STATICS_FILEPATH: str = 'static'
     STATICS_URLPATH: str = '/static'
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or b'blablabla'
@@ -24,6 +25,18 @@ class Config:
     def database_link():
         return f'postgresql://{Config.db_user}:{Config.db_password}@'\
                f'{Config.db_host}:{Config.db_port}/{Config.db_name}'
+
+
+    REDIS_URL = 'redis://localhost:6379/0'
+    redis = Redis()
+
+    # User role
+    role: dict = {
+        'admin': 900,
+        'author': 800,
+        'moderator': 700,
+        'user': 100
+    }
 
 
 config = Config()

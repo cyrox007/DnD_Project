@@ -1,7 +1,7 @@
 from fastapi import Request
 
 from database import Database
-from apps.site.components.users.model import User
+from components.users.model import User
 
 async def get_profile(request: Request):
     response = await request.json()

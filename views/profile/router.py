@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, status
-from apps.site.views.profile import handlers
+from views.profile import handlers
 
 
 def install(app: FastAPI):

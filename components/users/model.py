@@ -1,10 +1,10 @@
 import random
 import string
 
-from sqlalchemy import Column, Integer, String, DATE, ForeignKey
+from sqlalchemy import Column, Integer, String, DATE
 from sqlalchemy.orm import Session
 
-from apps.site.settings import Config
+from settings import Config
 from database import Database
 
 """ from werkzeug.security import generate_password_hash, check_password_hash """
@@ -40,7 +40,7 @@ class User(Database.Base):
             email = data['email'],
             username = data['username'],
             password = data['password'],
-            user_role = 100,
+            user_role = Config.role["user"],
             avatar = Config.AVATAR_DIR+"default_avatar.png",
             remember_token = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
         )
