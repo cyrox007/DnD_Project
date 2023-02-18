@@ -92,3 +92,18 @@ class User(Database.Base):
         except Exception as e:
             print(e)
             return False
+
+
+    @classmethod
+    def avatar_update(cls, db_session: Session, login, filepath):
+        user = db_session.query(User).filter(
+            User.username == login
+        ).first()
+        user.avatar = filepath
+        try:
+            db_session.add(user)
+            db_session.commit()
+            return True
+        except Exception as e:
+            print(e)
+            return False
