@@ -71,6 +71,7 @@ def temporary_saving(file) -> str:
     return temp_filepath
 
 def avatar_processing(file: str, new_path: str) -> None:
+    print(new_path)
     loaded_img = cv2.imread(file, cv2.IMREAD_COLOR)
     cropped_image = crop_image(loaded_img)
     changed_size_img = resize(cropped_image)
