@@ -74,7 +74,7 @@ def avatar_processing(file: str, new_path: str) -> None:
     loaded_img = cv2.imread(file, cv2.IMREAD_COLOR)
     cropped_image = crop_image(loaded_img)
     changed_size_img = resize(cropped_image)
-    cv2.imwrite(new_path, changed_size_img, [cv2.IMWRITE_WEBP_QUALITY]) # Сохраняем
+    cv2.imwrite(new_path, changed_size_img, [cv2.IMWRITE_WEBP_QUALITY, 50]) # Сохраняем
     print("Файл сохранен: " + new_path)
     os.remove(file)
 
