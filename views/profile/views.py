@@ -53,11 +53,10 @@ async def update_avatar(request: Request):
     
     filepath = decode_image(response["file"])
     avatar_path: dict = image_verification(filepath.split('.')[-2]) # генерируем пути для сохранения
-    print(filepath)
-    return {'ok': "ok"}
-    #user_image_processing.delay(filepath, avatar_path["for_save"])
+
+    user_image_processing.delay(filepath, avatar_path["for_save"])
     
-    """ if User.avatar_update(db_session, avatar_path["for_db"]) == True:
+    if User.avatar_update(db_session, avatar_path["for_db"]) == True:
         db_session.close()
         return { 
             "status": "ok",
@@ -65,4 +64,4 @@ async def update_avatar(request: Request):
             }
     else:
         db_session.close()
-        return { "status": "bed" } """
+        return { "status": "bed" }
