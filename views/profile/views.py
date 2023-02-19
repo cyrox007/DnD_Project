@@ -59,7 +59,10 @@ async def update_avatar(request: Request):
     
     if User.avatar_update(db_session, avatar_path["for_db"]) == True:
         db_session.close()
-        return { "status": "ok" }
+        return { 
+            "status": "ok",
+            "avatar": avatar_path["for_db"] 
+            }
     else:
         db_session.close()
         return { "status": "bed" }
