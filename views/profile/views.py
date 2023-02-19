@@ -50,8 +50,6 @@ async def update_password(request: Request):
 async def update_avatar(request: Request):
     response = await request.json()
     db_session = Database.connect_database()
-
-    print(response["file"])
     
     filepath = decode_image(response["file"])
     avatar_path: dict = image_verification(filepath, filepath.split('.')[-2]) # генерируем пути для сохранения
