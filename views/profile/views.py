@@ -51,7 +51,7 @@ async def update_avatar(request: Request):
     response = await request.json()
     db_session = Database.connect_database()
 
-
+    print(response)
     filepath = temporary_saving(file=response["file"])
     avatar_path: dict = image_verification(filepath, filepath.split('.')[0]) # генерируем пути для сохранения
     
