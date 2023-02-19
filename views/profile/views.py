@@ -52,7 +52,7 @@ async def update_avatar(request: Request):
     db_session = Database.connect_database()
     
     filepath = decode_image(response["file"])
-    avatar_path: dict = image_verification(filepath, filepath.split('.')[-2]) # генерируем пути для сохранения
+    avatar_path: dict = image_verification(filepath.split('.')[-2]) # генерируем пути для сохранения
     print(filepath)
     return {'ok': "ok"}
     #user_image_processing.delay(filepath, avatar_path["for_save"])
