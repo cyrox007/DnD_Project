@@ -56,7 +56,7 @@ async def update_avatar(request: Request):
 
     user_image_processing.delay(filepath, avatar_path["for_save"])
     
-    if User.avatar_update(db_session, avatar_path["for_db"]) == True:
+    if User.avatar_update(db_session, response["user"], avatar_path["for_db"]) == True:
         db_session.close()
         return { 
             "status": "ok",

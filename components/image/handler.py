@@ -9,7 +9,7 @@ def image_processing(img, full_path_file):
     loaded_img = cv2.imread(img, cv2.IMREAD_COLOR)
     cropped_image = crop_image(loaded_img)
     changed_size_img = resize(cropped_image)
-    cv2.imwrite(full_path_file, changed_size_img, [cv2.IMWRITE_WEBP_QUALITY]) # Сохраняем
+    cv2.imwrite(full_path_file, changed_size_img, [cv2.IMWRITE_WEBP_QUALITY, 50]) # Сохраняем
 
 def image_verification(filename) -> str:
     # формируем данные для БД
