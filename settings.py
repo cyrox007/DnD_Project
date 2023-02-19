@@ -13,7 +13,7 @@ class Config:
 
     # avatar
     AVATAR_DIR = '/uploads/us_avatars/'
-    FULL_AVATAR_DIR = os.path.join(PATH_TO_DIR, STATICS_FILEPATH, AVATAR_DIR)
+    FULL_AVATAR_DIR = os.path.join(PATH_TO_DIR, "/static"+AVATAR_DIR)
 
      # Database
     db_name = os.environ.get('DB_NAME', 'dnddbase')
