@@ -62,7 +62,7 @@ def crop_image(img: cv2.imread):
 def temporary_saving(file) -> str:
     temp_filepath = os.path.join(
         config.PATH_TO_DIR+'/static/uploads/av_temp/', 
-        secure_filename(file["Value"].filename)
+        secure_filename(file["Value"][-1])
         )
     file.save(temp_filepath)
     return temp_filepath
