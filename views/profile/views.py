@@ -2,7 +2,7 @@ from fastapi import Request
 
 from database import Database
 from components.users.model import User
-from components.image.handler import temporary_saving, image_verification
+from components.image.handler import image_verification, decode_image
 from components.image.tasks import user_image_processing
 
 async def get_profile(request: Request):
@@ -51,9 +51,11 @@ async def update_avatar(request: Request):
     response = await request.json()
     db_session = Database.connect_database()
 
-    print(response["file"]["Headers"]["Value"])
-    filepath = temporary_saving(file=response["file"]["Headers"])
-    avatar_path: dict = image_verification(filepath, filepath.split('.')[0]) # генерируем пути для сохранения
+    print(response["file"])
+    
+    filepath = decode_image(response["file"])
+    avatar_path: dict = image_verification(filepath, filepath.split('.')[-2]) # генерируем пути для сохранения
+    print(filepath)
     return {'ok': "ok"}
     #user_image_processing.delay(filepath, avatar_path["for_save"])
     

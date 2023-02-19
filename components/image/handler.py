@@ -1,7 +1,9 @@
+import os, string, random, base64
+
 from werkzeug.utils import secure_filename
-from settings import config
-import os
 import cv2
+
+from settings import config
 
 def image_processing(img, full_path_file):
     loaded_img = cv2.imread(img, cv2.IMREAD_COLOR)
@@ -72,3 +74,14 @@ def avatar_processing(file: str, new_path: str) -> None:
         return
     image_processing(file, new_path)
     os.remove(file)
+
+def decode_image(raw):
+    filename = ''.join(random.choice(string.ascii_lowercase) for i in range(10))+".png"
+    filepath = os.path.join(
+        config.PATH_TO_DIR+'/static/uploads/av_temp/', 
+        filename
+        )
+    img = open(filepath, "wb")
+    img.write(base64.decodebytes(raw))
+    img.close()
+    return filepath
