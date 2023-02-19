@@ -82,6 +82,6 @@ def decode_image(raw):
         filename
         )
     img = open(filepath, "wb")
-    img.write(base64.decodebytes(raw))
+    img.write(base64.b64decode(raw))
     img.close()
     return filepath
