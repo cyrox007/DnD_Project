@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
-from apps.site.settings import Config
+from settings import Config
 
 class Database:
     def connect_database():

@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, status
-from apps.site.views.profile import handlers
+from views.profile import views
 
 
 def install(app: FastAPI):
@@ -8,18 +8,24 @@ def install(app: FastAPI):
         "/",
         methods=["POST"],
         status_code=status.HTTP_200_OK,
-        endpoint=handlers.get_profile
+        endpoint=views.get_profile
     )
     router.add_api_route(
         "/setting",
         methods=["POST"],
         status_code=status.HTTP_200_OK,
-        endpoint=handlers.update_profile
+        endpoint=views.update_profile
     )
     router.add_api_route(
         "/update_password",
         methods=["POST"],
         status_code=status.HTTP_200_OK,
-        endpoint=handlers.update_password
+        endpoint=views.update_password
+    )
+    router.add_api_route(
+        "/update_avatar",
+        methods=["POST"],
+        status_code=status.HTTP_200_OK,
+        endpoint=views.update_avatar
     )
     app.include_router(router)

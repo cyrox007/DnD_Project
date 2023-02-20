@@ -4,11 +4,11 @@ from jinja2 import (
     select_autoescape
 )
 
-from apps.site.settings import config
+from settings import config
 """ from apps.site.utils.i18n import get_translation, _ """
 
 
-templateLoader = FileSystemLoader(searchpath="apps/site/templates")
+templateLoader = FileSystemLoader(searchpath="templates")
 env = Environment(
     loader=templateLoader,
     extensions=['jinja2.ext.i18n'],

@@ -4,7 +4,7 @@ from fastapi import Request
 
 """ from apps.site.components.users.decorators import get_session """
 from database import Database
-from apps.site.components.users.model import User
+from components.users.model import User
 
 
 async def authorization(request: Request = None):
