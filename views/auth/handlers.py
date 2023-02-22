@@ -2,12 +2,13 @@ import random
 import string
 from fastapi import Request
 
-""" from apps.site.components.users.decorators import get_session """
+from components.users.decorators import get_session
 from database import Database
 from components.users.model import User
 
 
-async def authorization(request: Request = None):
+@get_session
+async def authorization(db_session, request: Request = None):
     db_session = Database.connect_database()
     data = await request.json()
     user_data = User.get_user(db_session, data["username"])
