@@ -126,7 +126,7 @@ class UserVerification(Database.Base):
         verification_link = Config.BASE_URL+"verification/"+verification_code
         user = db_session.query(User).filter(
             User.username == data["username"]
-        )
+        ).first()
 
         email_verification_task.delay(data['email'], verification_link)
         
