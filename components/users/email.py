@@ -107,7 +107,7 @@ def email_verification(target, verification_link):
                             <table id="content-3" cellpadding="0" cellspacing="0" align="center">
                                 <tr>
                                     <td width="250" align="center" valign="top" bgcolor="#d80a3e" style="padding:5px;">
-                                        <a href="{0}">Перейтите по ссылке для того чтобы подтвердить регистрацию</a>
+                                        <a href="{}">Перейтите по ссылке для того чтобы подтвердить регистрацию</a>
                                     </td>
                                 </tr>
                             </table>
