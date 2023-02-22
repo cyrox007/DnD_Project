@@ -40,4 +40,7 @@ async def registration(request: Request):
 
 
 async def verified(code):
-    return {"status": code}
+    db_session = Database.connect_database()
+    user = UserVerification.verification_user(db_session, code)
+    db_session.close()
+    return {"status": user}
