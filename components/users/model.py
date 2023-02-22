@@ -123,7 +123,7 @@ class UserVerification(Database.Base):
     @classmethod
     def create_verification_code(cls, db_session: Session, data):
         verification_code = ''.join(random.choice(string.ascii_lowercase) for i in range(20))
-        verification_link = Config.BASE_URL+"verification/"+verification_code
+        verification_link = Config.BASE_URL+"auth/verified/"+verification_code
         user = db_session.query(User).filter(
             User.username == data["username"]
         ).first()
