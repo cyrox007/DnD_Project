@@ -7,15 +7,13 @@ from settings import config
 
 
 def email_verification(target, verification_link):
-    msg = email.message.Message()
-    msg['Subject'] = 'Благодарим вас за регистрацию, пройдите, пожалуйста, проверку почты'
-    msg['From'] = config.GMAIL_LOGIN
-    msg['To'] = target
+    subject = 'Благодарим вас за регистрацию, пройдите, пожалуйста, проверку почты'
+    login = config.GMAIL_LOGIN
     password = config.GMAIL_PASSWORD
 
     server = smtp.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(msg['From'], password)
+    server.login(login, password)
     
     email_content = """ <html>
 <head>
@@ -73,12 +71,10 @@ def email_verification(target, verification_link):
 </html> """.format(verification_link)
     
 
-    msg.add_header('Content-Type', 'text/html')
-    msg.set_payload(email_content)
-    
-    mime = MIMEText(msg, 'plain', 'utf-8')
-    mime['Subject'] = Header(msg['Subject'], 'utf-8')
+    mime = MIMEText(email_content, 'plain', 'utf-8')
+    mime['Subject'] = Header(subject, 'utf-8')
+    mime.add_header('Content-Type', 'text/html')
     # send the message via the server.
-    server.sendmail(msg['From'], msg['To'], mime.as_string())
+    server.sendmail(login, target, mime.as_string())
     server.quit()
-    print(f"Successfully sent email to {msg['To']}")
+    print(f"Successfully sent email to {target}")
