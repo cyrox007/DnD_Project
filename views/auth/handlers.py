@@ -9,7 +9,7 @@ from components.users.model import User
 
 @get_session
 async def authorization(db_session, request: Request = None):
-    db_session = Database.connect_database()
+    """ db_session = Database.connect_database() """
     data = await request.json()
     user_data = User.get_user(db_session, data["username"])
     if user_data is not None and data["password"] == user_data.password:
