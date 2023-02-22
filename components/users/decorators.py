@@ -13,7 +13,7 @@ from database import Database
 
     return wrapped_view """
 
-async def get_session(view):
+def get_session(view):
     @functools.wraps(view)
     def wrapped_view(*args, **kwargs):
         kwargs['db_session'] = Database.connect_database()
