@@ -147,6 +147,7 @@ class UserVerification(Database.Base):
         code_obj = db_session.query(UserVerification).filter(
             UserVerification.code == code
         ).first()
+        print(code_obj)
         if code_obj is not None:
             user_data = db_session.query(User).filter(
                 User.id == code_obj.user_id
