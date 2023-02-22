@@ -37,3 +37,7 @@ async def registration(request: Request):
     else:
         db_session.close()
         return {"status": "bed"}
+
+
+async def verified(code):
+    return {"status": code}
