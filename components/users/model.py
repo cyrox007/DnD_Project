@@ -1,13 +1,13 @@
 import random
 import string
+from datetime import date
 
-from sqlalchemy import Column, Integer, String, DATE
+from sqlalchemy import Column, ForeignKey, Integer, String, DATE
 from sqlalchemy.orm import Session
 
 from settings import Config
 from database import Database
-
-""" from werkzeug.security import generate_password_hash, check_password_hash """
+from components.users.tasks import email_verification_task
 
 
 class User(Database.Base):
@@ -44,6 +44,7 @@ class User(Database.Base):
             avatar = Config.AVATAR_DIR+"default_avatar.png",
             remember_token = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
         )
+
         try:
             db_session.add(new_user)
             db_session.commit()
@@ -107,3 +108,50 @@ class User(Database.Base):
         except Exception as e:
             print(e)
             return False
+
+
+class UserVerification(Database.Base):
+    __tablename__ = 'users_verification_email'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    code = Column(String(255), nullable=False, unique=True)
+
+    def __repr__(self):
+        return f"User {self.id}"
+
+    @classmethod
+    def create_verification_code(cls, db_session: Session, data):
+        verification_code = ''.join(random.choice(string.ascii_lowercase) for i in range(20))
+        verification_link = Config.BASE_URL+"verification/"+verification_code
+        user = db_session.query(User).filter(
+            User.username == data["username"]
+        )
+
+        email_verification_task.delay(data['email'], verification_link)
+        
+        new_code = UserVerification(
+            user_id = user.id,
+            code = verification_code
+        )
+        try:
+            db_session.add(new_code)
+            db_session.commit()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    @classmethod
+    def verification_user(cls, db_session: Session, code):
+        user = db_session.query(UserVerification).filter(
+            UserVerification.code == code
+        ).join(User).first()
+        if user is not None:
+            user.email_verified_at = date.today()
+            user.user_role = Config.role["user_verified"]
+            db_session.add(user)
+            db_session.commit()
+            return user
+        else:
+            return None

@@ -2,6 +2,7 @@ import os
 from redis import Redis
 
 class Config:
+    BASE_URL: str = "http://89.223.71.158:9090/"
     STATICS_FILEPATH: str = 'static'
     STATICS_URLPATH: str = '/static'
 
@@ -26,15 +27,20 @@ class Config:
         return f'postgresql://{Config.db_user}:{Config.db_password}@'\
                f'{Config.db_host}:{Config.db_port}/{Config.db_name}'
 
-
+    # Redis
     REDIS_URL = 'redis://localhost:6379/0'
     redis = Redis()
+
+    #GMail
+    GMAIL_LOGIN = "dmnddproject@gmail.com"
+    GMAIL_PASSWORD = "rblehhtujcupnruf"
 
     # User role
     role: dict = {
         'admin': 900,
         'author': 800,
         'moderator': 700,
+        'user_verified': 101,
         'user': 100
     }
 

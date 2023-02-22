@@ -7,10 +7,26 @@ sudo apt -y install postgresql
 ```
 \conninfo
 ```
+## Старт
+``` bash
+sudo service postgresql start
+```
 ## Настрока БД
 ``` bash
 sudo -iu postgres psql -c "alter user postgres with password 'postgres';"
 sudo -iu postgres psql -c "create database dnddbase;"
+```
+# Миграции
+``` bash
+alembic init alembic
+```
+## Генерация новых миграций
+``` bash
+alembic revision --message="Initial" --autogenerate
+```
+## Применение миграций
+``` bash
+alembic upgrade head
 ```
 # Redis
 ## Установка и запуск
