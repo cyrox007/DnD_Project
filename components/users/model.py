@@ -118,7 +118,7 @@ class UserVerification(Database.Base):
     code = Column(String(255), nullable=False, unique=True)
 
     def __repr__(self):
-        return f"User {self.id}"
+        return f"Email_token {self.id}"
 
     @classmethod
     def create_verification_code(cls, db_session: Session, data):
@@ -147,12 +147,11 @@ class UserVerification(Database.Base):
         code_obj = db_session.query(UserVerification).filter(
             UserVerification.code == code
         ).first()
-        print(code_obj)
         if code_obj is not None:
             user_data = db_session.query(User).filter(
                 User.id == code_obj.user_id
             ).first()
-            print(user_data)
+            
             user_data.email_verified_at = date.today()
             user_data.user_role = Config.role["user_verified"]
             try:
