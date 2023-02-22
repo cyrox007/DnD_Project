@@ -70,7 +70,7 @@ def email_verification(target, verification_link):
         </tr>
     </table><!-- wrapper -->
 </body>
-</html> """.format(verification_link)
+</html> """.format(verification_link).encode("utf-8")
     
 
     msg.add_header('Content-Type', 'text/html')
