@@ -155,3 +155,11 @@ class UserVerification(Database.Base):
             return True
         else:
             return False
+
+    @classmethod
+    def delete_code(cls, db_session: Session, code):
+        code = db_session.query(UserVerification).filter(
+            UserVerification.code == code
+        ).first()
+        db_session.delete(code)
+        db_session.commit()

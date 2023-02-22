@@ -1,8 +1,9 @@
 import random
 import string
 from fastapi import Request
+from fastapi.responses import HTMLResponse, RedirectResponse
 
-""" from components.users.decorators import get_session """
+from utils.j2 import render_template
 from database import Database
 from components.users.model import User, UserVerification
 
@@ -42,8 +43,9 @@ async def registration(request: Request):
 async def verified(code):
     db_session = Database.connect_database()
     if UserVerification.verification_user(db_session, code) == True:
+        UserVerification.delete_code(db_session, code)
         db_session.close()
-        return {"status": 'ok'}
+        return HTMLResponse(render_template("/verified/index.html"))
     else:
         db_session.close()
-        return{"status": "bed"}
+        return RedirectResponse("/404", status_code=404)
