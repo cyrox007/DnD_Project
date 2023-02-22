@@ -152,5 +152,6 @@ class UserVerification(Database.Base):
             user.user_role = Config.role["user_verified"]
             db_session.add(user)
             db_session.commit()
+            return True
         else:
-            return None
+            return False

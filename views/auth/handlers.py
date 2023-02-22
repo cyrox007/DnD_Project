@@ -41,8 +41,9 @@ async def registration(request: Request):
 
 async def verified(code):
     db_session = Database.connect_database()
-    if UserVerification.verification_user(db_session, code) is not None:
+    if UserVerification.verification_user(db_session, code) == True:
         db_session.close()
         return {"status": 'ok'}
     else:
+        db_session.close()
         return{"status": "bed"}
