@@ -144,10 +144,13 @@ class UserVerification(Database.Base):
 
     @classmethod
     def verification_user(cls, db_session: Session, code):
-        user = db_session.query(UserVerification).filter(
+        code_obj = db_session.query(UserVerification).filter(
             UserVerification.code == code
-        ).join(User).first()
-        if user is not None:
+        ).first()
+        if code_obj is not None:
+            user = db_session.query(User).filter(
+                User.id == code_obj.user_id
+            ).first()
             user.email_verified_at = date.today()
             user.user_role = Config.role["user_verified"]
             db_session.add(user)
