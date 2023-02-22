@@ -70,13 +70,15 @@ def email_verification(target, verification_link):
         </tr>
     </table><!-- wrapper -->
 </body>
-</html> """.format(verification_link).encode("utf-8")
+</html> """.format(verification_link)
     
 
     msg.add_header('Content-Type', 'text/html')
     msg.set_payload(email_content)
-
+    
+    mime = MIMEText(msg, 'plain', 'utf-8')
+    mime['Subject'] = Header(msg['Subject'], 'utf-8')
     # send the message via the server.
-    server.sendmail(msg['From'], msg['To'], msg.as_string())
+    server.sendmail(msg['From'], msg['To'], mime.as_string())
     server.quit()
     print(f"Successfully sent email to {msg['To']}")
