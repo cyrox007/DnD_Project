@@ -148,14 +148,19 @@ class UserVerification(Database.Base):
             UserVerification.code == code
         ).first()
         if code_obj is not None:
-            user = db_session.query(User).filter(
+            user_data = db_session.query(User).filter(
                 User.id == code_obj.user_id
             ).first()
-            user.email_verified_at = date.today()
-            user.user_role = Config.role["user_verified"]
-            db_session.add(user)
-            db_session.commit()
-            return True
+            print(user_data)
+            user_data.email_verified_at = date.today()
+            user_data.user_role = Config.role["user_verified"]
+            try:
+                db_session.add(user_data)
+                db_session.commit()
+                return True
+            except Exception as e:
+                print(e)
+                return False
         else:
             return False
 
