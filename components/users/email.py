@@ -71,7 +71,7 @@ def email_verification(target, verification_link):
 </html> """.format(verification_link)
     
 
-    mime = MIMEText(email_content, 'plain', 'utf-8')
+    mime = MIMEText(email_content, 'html', 'utf-8')
     mime['Subject'] = Header(subject, 'utf-8')
     mime.add_header('Content-Type', 'text/html')
     # send the message via the server.
