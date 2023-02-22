@@ -8,7 +8,8 @@ def make_celery() -> Celery:
         broker=config.REDIS_URL,
         backend=config.REDIS_URL,
         include=[
-            "components.image.tasks"
+            "components.image.tasks",
+            "components.users.tasks"
         ]
     )
 
