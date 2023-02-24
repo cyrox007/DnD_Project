@@ -1,6 +1,5 @@
 from fastapi.responses import HTMLResponse
 from fastapi import Request
-from typing import Union
 
 from utils.j2 import render_template
 

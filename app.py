@@ -7,6 +7,7 @@ def create_app() -> FastAPI:
     from views.main import router as main_router
     from views.auth import router as auth_router
     from views.profile import router as profile_router
+    from views.game_event import router as event_router
 
     app = FastAPI()
     app.mount(
@@ -18,6 +19,7 @@ def create_app() -> FastAPI:
     main_router.install(app)
     auth_router.install(app)
     profile_router.install(app)
+    event_router.install(app)
 
     return app
 

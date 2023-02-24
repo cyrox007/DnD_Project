@@ -3,7 +3,7 @@ import string
 from datetime import date
 
 from sqlalchemy import Column, ForeignKey, Integer, String, DATE
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, relationship
 
 from settings import Config
 from database import Database
@@ -23,6 +23,10 @@ class User(Database.Base):
     avatar = Column(String(), nullable=False)
     email_verified_at = Column(DATE, nullable=True)
     remember_token = Column(String(100))
+
+    user_verification = relationship("UserVerification", uselist=False)
+    game_events = relationship("GameEvent")
+    users_substract = relationship("UsersGameEvents")
     
     def __repr__(self):
         return f"User {self.id}"
@@ -116,6 +120,7 @@ class UserVerification(Database.Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
     code = Column(String(255), nullable=False, unique=True)
+    
 
     def __repr__(self):
         return f"Email_token {self.id}"

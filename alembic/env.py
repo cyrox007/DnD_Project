@@ -22,6 +22,8 @@ if config.config_file_name is not None:
 from components.users.model import User, UserVerification
 target_metadata = User.__table__.metadata
 
+from components.game_event.model import GameEvent, UsersGameEvents
+
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
