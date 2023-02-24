@@ -22,7 +22,7 @@ class GameEvent(Database.Base):
     connected_players_count = Column(Integer, default=0)
     game_status = Column(BOOLEAN, default=True)
 
-    users_substract = relationship("UsersGameEvents")
+    
 
     def __repr__(self):
         return f"GameEvent {self.id}"

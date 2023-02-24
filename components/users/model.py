@@ -23,10 +23,6 @@ class User(Database.Base):
     avatar = Column(String(), nullable=False)
     email_verified_at = Column(DATE, nullable=True)
     remember_token = Column(String(100))
-
-    user_verification = relationship("UserVerification", uselist=False)
-    game_events = relationship("GameEvent")
-    users_substract = relationship("UsersGameEvents")
     
     def __repr__(self):
         return f"User {self.id}"
