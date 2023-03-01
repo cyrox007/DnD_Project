@@ -15,15 +15,14 @@ class GameEvent(Database.Base):
     date_event = Column(DateTime(timezone=True), nullable=False)
     loscut = Column(String, nullable=False)
     description = Column(TEXT, default="There is no description")
+    id_game_campaign = Column(Integer, nullable=True)
     online = Column(BOOLEAN, default=False)
     privacy = Column(BOOLEAN, default=False)
     venue = Column(TEXT, nullable=True) # Место проведения события если офлайн
     id_master = Column(Integer, ForeignKey("users.id"))
     connected_players_count = Column(Integer, default=0)
     game_status = Column(BOOLEAN, default=True)
-
     
-
     def __repr__(self):
         return f"GameEvent {self.id}"
 

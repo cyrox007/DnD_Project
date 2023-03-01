@@ -23,6 +23,7 @@ from components.users.model import User, UserVerification
 target_metadata = User.__table__.metadata
 
 from components.game_event.model import GameEvent, UsersGameEvents
+""" from components.game_campaign.model import GameCampaign """
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
